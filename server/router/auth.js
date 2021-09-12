@@ -1,5 +1,8 @@
 const express = require('express');
 const router = new express.Router();
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
 
 require('../db/conn');
 const User = require("../model/userSchema");
@@ -84,15 +87,26 @@ router.post('/signin', async (req, res) => {
         //userLogin will container full document with id same as the specified one
         const userLogin = await User.findOne({ email: email });
 
-        console.log(userLogin);
- 
-        if(!userLogin) {
-            res.status(400).json({ error: "user error"})
-        } else {
-            res.json({ message: "Sign in successful"})
-        }
+        if(userLogin) {
+            const isMatch = await bcrypt.compare(password, userLogin.password)
 
-        
+            const token = await userLogin.generateAuthToken();
+            console.log(token);
+            // console.log(userLogin);
+
+            res.cookie("jwtoken", token, {
+                expires: new Date(Date.now() + 25892000000), //will expire in 30 days
+                httpOnly: true
+            })
+    
+            if(!isMatch) {
+            res.status(400).json({ error: "Invalid credentials"})
+            } else {
+                res.json({ message: "Sign in successful"})
+            }
+        } else {
+            res.status(400).json({ error: 'Invalid credentials '});
+        }
 
     } catch (err) {
         console.log(err);
