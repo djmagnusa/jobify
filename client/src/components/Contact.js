@@ -1,11 +1,13 @@
 import React from 'react';
 
-const Home = () => {
+const Contact = () => {
     return (
         <div>
             <p>WELCOME</p>
-            <h1>Jobify - Job Profiles</h1>
+            <h1>Contact page</h1>
         
         </div>
     )
 }
+
+export default Contact;
