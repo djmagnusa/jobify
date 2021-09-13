@@ -1,13 +1,15 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import {NavLink} from "react-router-dom";
-
+import logo from "../images/logo1.png"
 
 const Navbar = () => {
     return (
         <>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <NavLink className="navbar-brand" to="#">Navbar</NavLink>
+                <NavLink className="navbar-brand" to="#">
+                    <i className="fa fa-id-card" style={{paddingLeft: "10px", fontSize: "27px", color: "darkblue"}}></i><span className="logo">jobify.</span>
+                </NavLink>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
                 </button>
