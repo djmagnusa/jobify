@@ -1,4 +1,6 @@
 /* register css */
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 .bg-light {
   background-color: #ffff !important;
 }
@@ -7,6 +9,18 @@ color: #fff;
 background: #63738a;
 font-family: 'Roboto', sans-serif;
 }
+
+.logo, fa-id-card{
+    color: darkblue;
+    padding-left: 20px;
+    font-family: 'Lobster', cursive;
+    font-size: 28px;
+}
+
+.blue-color{
+  color: blue;
+}
+
 .form-control {
 height: 40px;
 box-shadow: none;
