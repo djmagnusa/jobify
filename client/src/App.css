@@ -59,7 +59,7 @@ left: 0;
 .signup-form h2:after {
 right: 0;
 }
-.signup-form .hint-text {
+.signup-form {
 color: #999;
 margin-bottom: 30px;
 text-align: center;
@@ -105,6 +105,7 @@ text-decoration: none;
 text-decoration: underline;
 } 
 /* login css */
+
 .login-form {
   width: 400px;
   margin: 30px auto;
@@ -115,14 +116,21 @@ text-decoration: underline;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
   padding: 30px;
 }
+
+
 .login-form h2 {
   margin: 0 0 15px;
 }
+
+.login-form .form-control{
+  margin-bottom: 20px;
+}
+
 .form-control, .login-btn {
   border-radius: 2px;
 }
 .input-group-prepend .fa {
-  font-size: 18px;
+  font-size: 26px;
 }
 .login-btn {
   font-size: 15px;
@@ -155,7 +163,7 @@ text-decoration: underline;
   padding: 0 10px;
   background: #f7f7f7;
   position: relative;
-  top: -11px;
+  top: -15px;
   z-index: 1;
 }   
 /* About css */
