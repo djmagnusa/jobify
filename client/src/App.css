@@ -195,6 +195,25 @@ text-decoration: underline;
   width: 100%;
 }
 
+/* Home css */
+
+.home-page{
+  height: calc(100vh - 68px);
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  background: url("./images/background.jpg");
+  background-size: cover;
+}
+
+.home-div{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
 /* About css */
 
 
