@@ -7,6 +7,7 @@ import About from "./components/About";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Contact from "./components/Contact";
+import NotFound from "./components/NotFound";
 
 const App = () => {
   return (
@@ -30,6 +31,10 @@ const App = () => {
 
       <Route path="/signup">
           <Signup />
+      </Route>
+
+      <Route>
+        <NotFound />
       </Route>
       
     </div>
