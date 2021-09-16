@@ -1,11 +1,40 @@
-import React from 'react';
-import { NavLink } from "react-router-dom";
+import React, {useState} from 'react';
+import { NavLink, useHistory } from "react-router-dom";
 
 const Login = () => {
+
+    const history = useHistory();
+    const [email, setEmail]= useState('');
+    const [password, setPassword] = useState('');
+
+    const loginUser = async (e) => {
+        e.preventDefault();
+
+        const res = await fetch('/signin', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email,
+                password
+            })
+        });
+
+        const data = res.json();
+
+        if(data.status === 400 || !data){
+            window.alert("Invalid Credentials");
+        } else {
+            window.alert("Login Successfull")
+            history.push("/")
+        }
+    }
+
     return (
         <>
         <div class="login-form">
-            <form>
+            <form method="POST">
                 <h2 class="text-center">Log in</h2>   
                 <div class="form-group">
                     <div class="input-group">
@@ -14,7 +43,12 @@ const Login = () => {
                                 <span class="fa fa-user"></span>
                             </span>                    
                         </div>
-                        <input type="text" class="form-control" name="username" placeholder="Username" required="required"/>				
+                        <input type="text" class="form-control" name="email"
+                         value={email}
+                         onChange={(e) => setEmail(e.target.value)}
+                         placeholder="Your email" 
+                         required="required"
+                         />				
                     </div>
                 </div>
                 <div class="form-group">
@@ -24,11 +58,16 @@ const Login = () => {
                                 <i class="fa fa-lock"></i>
                             </span>                    
                         </div>
-                        <input type="password" class="form-control" name="password" placeholder="Password" required="required"/>				
+                        <input type="password" class="form-control" name="password"
+                         value={password}
+                         onChange={(e) => setPassword(e.target.value)}
+                         placeholder="Your password" 
+                         required="required"
+                         />				
                     </div>
                 </div>        
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary login-btn btn-block">Log in</button>
+                    <button type="submit" class="btn btn-primary login-btn btn-block" onClick={loginUser}>Log in</button>
                 </div>
                 <div class="clearfix">
                     <label class="float-left form-check-label"><input type="checkbox"/> Remember me</label>
