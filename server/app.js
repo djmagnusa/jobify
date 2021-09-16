@@ -16,12 +16,12 @@ const PORT = process.env.PORT;
 
 
 
-//Middleware
+// //Middleware
 
-const middleware = (req, res, next) => {
-    console.log("hello my middleware");
-    next();
-}
+// const middleware = (req, res, next) => {
+//     console.log("hello my middleware");
+//     next();
+// }
 
 
 
@@ -29,9 +29,9 @@ const middleware = (req, res, next) => {
 //     res.send('Hello world from the server app.js');
 // })
 
-app.get('/about', middleware, (req, res) => {
-    res.send('Hello about world from the server')
-})
+// app.get('/about', (req, res) => {
+//     res.send('Hello about world from the server')
+// })
 
 app.get('/contact', (req, res) => {
     res.send('Hello contact world from the server')
