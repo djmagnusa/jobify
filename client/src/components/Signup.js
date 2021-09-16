@@ -13,7 +13,7 @@ const Signup = () => {
         name = e.target.name;
         value = e.target.value;
 
-        setUser({ ...user, [name]: value}) //[name] is dynamic data
+        setUser({ ...user, [name]: value}) //[name] is dynamic data as name will already be a key in ...user
      }
 
      const PostData = async (e) => {
@@ -26,7 +26,7 @@ const Signup = () => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({
+            body: JSON.stringify({                             //as browser does not understand JSON so converting to strings
                 name, email, phone, work, password, cpassword
             })
         });
@@ -120,7 +120,7 @@ const Signup = () => {
                         <i class="fa fa-lock"></i>
                     </span>
                 </div>
-                <input type="text" class="form-control" name="password" autocomplete="off"
+                <input type="password" class="form-control" name="password" autocomplete="off"
                     value={user.password}
                     onChange={handleInputs}
                     placeholder="Password" 
@@ -136,7 +136,7 @@ const Signup = () => {
                         <i class="fa fa-check"></i>
                     </span>
                 </div>
-                <input type="text" class="form-control" name="cpassword" autocomplete="off"
+                <input type="password" class="form-control" name="cpassword" autocomplete="off"
                     value={user.cpassword}
                     onChange={handleInputs}
                     placeholder="Confirm Password" 
