@@ -1,12 +1,54 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink, useHistory } from 'react-router-dom';
 
 
 const Signup = () => {
+    const history = useHistory();
+    const [user, setUser] = useState({
+        name: "",email:"", phone: "", work: "", password: "", cpassword: ""
+    });
+
+    let name, value;
+    const handleInputs = (e) => {
+        name = e.target.name;
+        value = e.target.value;
+
+        setUser({ ...user, [name]: value}) //[name] is dynamic data
+     }
+
+     const PostData = async (e) => {
+        e.preventDefault();
+
+        const { name, email, phone, work, password, cpassword } = user;
+
+        const res = await fetch("/register", {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name, email, phone, work, password, cpassword
+            })
+        });
+
+        const data = await res.json();
+
+        if(data.status === 422 || !data){
+            window.alert("Invalid Registration");
+            console.log("Invalid Rregistration");
+        } else {
+            window.alert("Registration Successfull");
+            console.log("Successfull Registration")
+
+            history.push("/login");
+        }
+
+     }
+
     return (
         <>
         <div class="signup-form">
-        <form>
+        <form method="POST">
         <h2>Sign Up</h2>
         <p>Please fill in this form to create an account!</p>
         <hr />
@@ -17,7 +59,13 @@ const Signup = () => {
                         <span class="fa fa-user"></span>
                     </span>
                 </div>
-                <input type="text" class="form-control" name="username" placeholder="Username" required="required" />
+                <input type="text" class="form-control" name="name" autocomplete="off" 
+                    value={user.name}
+                    onChange={handleInputs}
+                    placeholder="Name" 
+                    required="required" 
+                />
+            
             </div>
         </div>
         <div class="form-group">
@@ -27,7 +75,12 @@ const Signup = () => {
                         <i class="fa fa-paper-plane"></i>
                     </span>
                 </div>
-                <input type="email" class="form-control" name="email" placeholder="Email Address" required="required" />
+                <input type="email" class="form-control" name="email" autocomplete="off"
+                    value={user.email}
+                    onChange={handleInputs}
+                    placeholder="Email" 
+                    required="required"
+                />
             </div>
         </div>
         <div class="form-group">
@@ -37,7 +90,12 @@ const Signup = () => {
                     <i class="fa fa-phone"></i>
                     </span>
                 </div>
-                <input type="number" class="form-control" name="mobile" placeholder="Phone Number" required="required" />
+                <input type="number" class="form-control" name="phone" autocomplete="off"
+                    value={user.phone}
+                    onChange={handleInputs}
+                    placeholder="Phone Number" 
+                    required="required" 
+                />
             </div>
         </div>
         <div class="form-group">
@@ -47,7 +105,12 @@ const Signup = () => {
                     <i class="fa fa-briefcase"></i>
                     </span>
                 </div>
-                <input type="text" class="form-control" name="work" placeholder="Your Profession" required="required" />
+                <input type="text" class="form-control" name="work" autocomplete="off"
+                    value={user.work}
+                    onChange={handleInputs}
+                    placeholder="Your Profession"
+                    required="required" 
+                />
             </div>
         </div>
         <div class="form-group">
@@ -57,7 +120,12 @@ const Signup = () => {
                         <i class="fa fa-lock"></i>
                     </span>
                 </div>
-                <input type="text" class="form-control" name="password" placeholder="Password" required="required" />
+                <input type="text" class="form-control" name="password" autocomplete="off"
+                    value={user.password}
+                    onChange={handleInputs}
+                    placeholder="Password" 
+                    required="required" 
+                />
             </div>
         </div>
         <div class="form-group">
@@ -68,14 +136,19 @@ const Signup = () => {
                         <i class="fa fa-check"></i>
                     </span>
                 </div>
-                <input type="text" class="form-control" name="cpassword" placeholder="Confirm Password" required="required" />
+                <input type="text" class="form-control" name="cpassword" autocomplete="off"
+                    value={user.cpassword}
+                    onChange={handleInputs}
+                    placeholder="Confirm Password" 
+                    required="required" 
+                />
             </div>
         </div>
         <div class="form-group">
             <label class="form-check-label"><input type="checkbox" required="required" /> I accept the <NavLink to="/login">Terms of Use</NavLink> &amp; <NavLink to="/login">Privacy Policy</NavLink></label>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+            <button type="submit" class="btn btn-primary btn-lg" onClick={PostData}>Sign Up</button>
         </div>
 
         <div class="text-center">Already have an account? <NavLink to="/login">Login here</NavLink></div>
