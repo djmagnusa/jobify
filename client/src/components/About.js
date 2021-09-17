@@ -1,9 +1,12 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useHistory } from "react-router-dom";
+// import mypic from "../images/mypic.jpg";
+// import defaultpic from "../images/defaultpic.jpg";
 
 const About = () => {
 
     const history = useHistory();
+    const [userData, setUserData] = useState({});
 
     const callAboutPage = async () => {
         try{
@@ -18,6 +21,7 @@ const About = () => {
 
             const data = await res.json();
             console.log(data);
+            setUserData(data);
 
             if(!res.status === 200){
                 const error = new Error(res.error);
@@ -41,15 +45,16 @@ const About = () => {
                     <div className="row">
                         <div className="col-md-4">
                             <div className="profile-img">
-                                 <img alt="photo" />
+                                {/* <img src={userData.name === "Pratush" ? mypic : defaultpic } alt="photo" /> */}
+                                <img alt="photo" />
                             </div>
                             
                         </div>
 
                         <div className="col-md-6">
                             <div className="profile-head">
-                                <h5>Pratush Bhandari</h5>
-                                <h6>Full-Stack Developer</h6>
+                                <h5>{ userData.name }</h5>
+                                <h6>{ userData.work }</h6>
                                 <p className="profile-rating pt-3 mb-5">RANKINGS: <span> 1/10 </span></p>
                                 <ul className="nav nav-tabs" role="tablist">
                                     <li className="nav-item">
@@ -105,7 +110,7 @@ const About = () => {
                                         </div>
 
                                         <div className="col-md-6">
-                                            <p>Pratush Bhandari</p>
+                                            <p>{ userData.name}</p>
                                         </div>
                                     </div>
 
@@ -115,7 +120,7 @@ const About = () => {
                                         </div>
 
                                         <div className="col-md-6">
-                                            <p>pratush.bh@gmail.com</p>
+                                            <p>{ userData.email }</p>
                                         </div>
                                     </div>
 
@@ -125,7 +130,7 @@ const About = () => {
                                         </div>
 
                                         <div className="col-md-6">
-                                            <p>9867645213</p>
+                                            <p>{ userData.phone }</p>
                                         </div>
                                     </div>
 
@@ -135,7 +140,7 @@ const About = () => {
                                         </div>
 
                                         <div className="col-md-6">
-                                            <p>Full Stack Developer</p>
+                                            <p>{ userData.work }</p>
                                         </div>
 
                                     
